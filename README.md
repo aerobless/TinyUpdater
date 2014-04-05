@@ -5,12 +5,12 @@ In some operating systems, for example Windows, you can't overwrite .jar files w
 
 With TinyUpdater you can work around this issue. Just have your application download "TinyUpdater" and run it through an executor before closing your main application.
 
-  try {
-			Runtime.getRuntime().exec("java -jar "+downloadPath+" 10 "+updateURL);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+  	try {
+				Runtime.getRuntime().exec("java -jar "+downloadPath+" 10 "+updateURL);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 you can specify a waitTime in seconds and a updateURL where the updated .jar of your application can be found.
 
