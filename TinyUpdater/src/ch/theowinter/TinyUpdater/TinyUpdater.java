@@ -47,12 +47,6 @@ public class TinyUpdater {
 			downloadFile(updateURL, downloadPath);
 			System.out.println(".....");
 			System.out.print("  Update complete..");
-			try {
-				Runtime.getRuntime().exec("java -jar "+downloadPath);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 	}
 	
