@@ -1,0 +1,65 @@
+<project name="TinyUpdater" default="main" basedir=".">
+	<!-- env variables -->
+	<property name="target" location="target/" />
+	<property name="Ver" value="1.0" />
+	<property name="Author" value="Theo Winter (aerobless)" />
+	<property name="main-class"  value="ch.theowinter.TinyUpdater.TinyUpdater"/>
+    <path id="classpath">
+        <fileset dir="lib" includes="**/*.jar"/>
+        <fileset dir="lib" />
+    </path>
+	
+	<target name="main" depends="prep, compile, jar, clean" description="Main target">
+		<echo>Building the .jar file.</echo>
+	</target>
+	
+	<!-- Prep -->
+	<target name="prep" description="Initializes project">
+		<echo>Cleaning</echo>
+		<delete failonerror="false">
+			<fileset dir="build" includes="**/*" />
+		</delete>
+		<delete file="dist/TinyUpdater.jar" />
+		<tstamp />
+		<mkdir dir="dist" />
+		<mkdir dir="build" />
+		<mkdir dir="lib" />
+	</target>	
+	
+	<!-- compile -->
+	<target name="compile" description="Compile TinyUpdater source">
+		<echo>Compiling</echo>
+		<javac target="1.7" source="1.7" srcdir="src/ch/" destdir="build" debug="true" debuglevel="lines,vars,source" classpathref="classpath" includeantruntime="false">
+			<compilerarg value="-Xbootclasspath/p:${toString:classpath}" />
+		</javac>
+		<copy file="licence.txt" tofile="build/licence.txt" />
+	</target>	
+
+	<!-- jar -->
+	<target name="jar" description="Packages JAR distribution">
+		<echo>Packaging JAR distribution for CLIENT</echo>
+		<jar jarfile="dist/TinyUpdater.jar" basedir="build">
+		    <zipgroupfileset includes="*.jar" dir="lib"/>
+			<manifest>
+			    <attribute name="Main-Class" value="${main-class}"/>
+				<attribute name="TinyUpdater" value="Dev: ${Author}" />
+				<attribute name="Version" value="${Ver}" />
+				<attribute name="Built-By" value="${user.name}" />
+			</manifest>
+		</jar>
+	</target>	
+	
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+	<!-- clean -->
+	<target name="clean" description="Clean up project">
+		<echo>Cleaning up</echo>
+		<delete dir="build" />
+		<delete dir="lib" />
+	</target>
+</project>
