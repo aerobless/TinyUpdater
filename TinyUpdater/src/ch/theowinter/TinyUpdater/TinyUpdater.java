@@ -76,7 +76,6 @@ public class TinyUpdater {
 		try {
 			dataXML = new URL(jarLocation, filename);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return dataXML.getPath();
