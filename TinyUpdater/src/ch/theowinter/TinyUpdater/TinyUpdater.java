@@ -20,18 +20,17 @@ public class TinyUpdater {
 	 * The original application needs to be shutdown at that point otherwise the update fails.
 	 */
 	public static void main(String[] args) {
-		args = new String[]{"10",""};
-		System.out.println("  TinyUpdater");
-		System.out.println("<<----------->>");
-		System.out.println("initalizing");
+		args = new String[]{"10","http://w1nter.net:8080/job/ToxicTodo/lastSuccessfulBuild/artifact/ToxicTodo/dist/ToxicTodoClient.jar"};
+		System.out.println("TinyUpdater:");
+		System.out.print("  Initalizing");
 		updateURL = args[1];
 		System.out.print(".");
 		waitTime = Integer.parseInt(args[0]);
 		System.out.print(".");
 		String[] updateArray  = updateURL.split("/");
 		String downloadPath = getJarDirectory(updateArray[updateArray.length-1]);
-		System.out.print(".");
-		System.out.println("Preparing for update");
+		System.out.println(".");
+		System.out.print("  Preparing for update");
 		for(int i = 0; i<waitTime; i++){
 			try {
 				Thread.sleep(i*100);
@@ -40,10 +39,11 @@ public class TinyUpdater {
 				System.out.println("Error - Can't sleep properly.");
 			}
 		}
-		System.out.println("Downloading update..");
+		System.out.println(".");
+		System.out.print("  Downloading update..");
 		downloadFile(updateURL, downloadPath);
-		System.out.print(".....");
-		System.out.println("Update complete..");
+		System.out.println(".....");
+		System.out.print("  Update complete..");
 		try {
 			Runtime.getRuntime().exec("java -jar "+downloadPath);
 		} catch (IOException e) {
