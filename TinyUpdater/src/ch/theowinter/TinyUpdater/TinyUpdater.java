@@ -20,6 +20,7 @@ public class TinyUpdater {
 	 * The original application needs to be shutdown at that point otherwise the update fails.
 	 */
 	public static void main(String[] args) {
+		args = new String[]{"10",""};
 		System.out.println("  TinyUpdater");
 		System.out.println("<<----------->>");
 		System.out.println("initalizing");
