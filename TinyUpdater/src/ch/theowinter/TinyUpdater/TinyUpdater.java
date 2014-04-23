@@ -46,7 +46,7 @@ public class TinyUpdater {
 			System.out.print("  Downloading update..");
 			downloadFile(updateURL, downloadPath);
 			System.out.println(".....");
-			System.out.print("  Update complete..");
+			System.out.println("  Update complete..");
 		}
 	}
 	
