@@ -91,7 +91,5 @@ public class TinyUI implements Runnable, Observer {
 		System.out.println("UPDATING DUE TO OBSERVER");
 		lblStatus.setText(tinyProgress.getCurrentTask());
 		progressBar.setValue(tinyProgress.getOverallProgress());
-		
 	}
-
 }

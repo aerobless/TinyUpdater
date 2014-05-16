@@ -33,6 +33,8 @@ public class TinyProgressStatus extends Observable{
 		currentTask = aCurrentTask;
 		overallProgress = processPercentage;
 		notifyObservers();
+		setChanged();
+		System.out.println("would notify");
 	}
 
 	/**
@@ -47,10 +49,13 @@ public class TinyProgressStatus extends Observable{
 	 */
 	public final void setOverallProgress(int processPercentage) {
 		overallProgress = processPercentage;
+		setChanged();
 		notifyObservers();
 	}
 	
 	public final void activateObserver(Observer o){
-		addObserver(o);
+		System.out.println("ddd");
+		setChanged();
+		this.addObserver(o);
 	}
 }
