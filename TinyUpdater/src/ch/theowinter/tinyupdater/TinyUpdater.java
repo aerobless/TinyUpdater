@@ -54,11 +54,7 @@ public class TinyUpdater {
 		TinyProgressStatus tinyProgress = new TinyProgressStatus("Initalizing updater..", 0);
 		TinyUI tinyUI = new TinyUI(tinyProgress);
 		tinyProgress.activateObserver(tinyUI);
-		
-		Thread tinyUIThread = new Thread(tinyUI);
-		tinyUIThread.setDaemon(true);
-		tinyUIThread.start();
-
+		tinyUI.run();
 		
 		String[] updateArray  = updateURL.split("/");
 		String downloadPath = getJarDirectory(updateArray[updateArray.length-1]);

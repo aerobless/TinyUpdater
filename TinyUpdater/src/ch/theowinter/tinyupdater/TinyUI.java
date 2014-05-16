@@ -12,12 +12,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-public class TinyUI implements Runnable, Observer {
+public class TinyUI implements Observer {
 
 	private JFrame frmTinyupdater;
 	private TinyProgressStatus tinyProgress;
 	private JLabel lblStatus;
 	private JProgressBar progressBar;
+	private TinyUI main = this;
 
 	/**
 	 * Create the application.
@@ -30,15 +31,15 @@ public class TinyUI implements Runnable, Observer {
 	/**
 	 * Launch the application.
 	 */
-	@Override
 	public void run() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TinyUI window = new TinyUI(tinyProgress);
-					window.frmTinyupdater.setVisible(true);
+					main = new TinyUI(tinyProgress);
+					main.frmTinyupdater.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+				//TODO:
+					System.out.println("error here");
 				}
 			}
 		});
@@ -51,7 +52,6 @@ public class TinyUI implements Runnable, Observer {
 		frmTinyupdater = new JFrame();
 		frmTinyupdater.setTitle("TinyUpdater");
 		frmTinyupdater.setBounds(100, 100, 445, 103);
-		frmTinyupdater.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTinyupdater.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		//We don't want the user to quit during an update.
@@ -88,8 +88,13 @@ public class TinyUI implements Runnable, Observer {
 
 	@Override
 	public void update(Observable aO, Object aArg) {
+		//main.frmTinyupdater.setVisible(false);
 		System.out.println("UPDATING DUE TO OBSERVER");
-		lblStatus.setText(tinyProgress.getCurrentTask());
+		main.lblStatus.setText(tinyProgress.getCurrentTask());
+		System.out.println(tinyProgress.getCurrentTask());
+		main.lblStatus.setVisible(false);
+
 		progressBar.setValue(tinyProgress.getOverallProgress());
+		System.out.println(tinyProgress.getOverallProgress());
 	}
 }
