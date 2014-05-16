@@ -1,4 +1,4 @@
-package ch.theowinter.TinyUpdater;
+package ch.theowinter.tinyupdater;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -49,7 +49,7 @@ public class TinyUpdater {
 			System.out.println("  Update complete..");
 		}
 	}
-	
+
 	public static void downloadFile(String downloadURL, String filenameAndPath) {
 		try {
 			URL url = new URL(downloadURL);
@@ -69,7 +69,7 @@ public class TinyUpdater {
 			System.out.println(io);
 		}
 	}
-	
+
 	public static String getJarDirectory(String filename){
 		URL jarLocation = TinyUpdater.class.getProtectionDomain().getCodeSource().getLocation();
 		URL dataXML = null;

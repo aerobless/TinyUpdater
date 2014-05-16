@@ -3,16 +3,16 @@
 	<property name="target" location="target/" />
 	<property name="Ver" value="1.0" />
 	<property name="Author" value="Theo Winter (aerobless)" />
-	<property name="main-class"  value="ch.theowinter.TinyUpdater.TinyUpdater"/>
+	<property name="main-class"  value="ch.theowinter.tinyupdater.TinyUpdater"/>
     <path id="classpath">
         <fileset dir="lib" includes="**/*.jar"/>
         <fileset dir="lib" />
     </path>
-	
+
 	<target name="main" depends="prep, compile, jar, clean" description="Main target">
 		<echo>Building the .jar file.</echo>
 	</target>
-	
+
 	<!-- Prep -->
 	<target name="prep" description="Initializes project">
 		<echo>Cleaning</echo>
@@ -25,7 +25,7 @@
 		<mkdir dir="build" />
 		<mkdir dir="lib" />
 	</target>	
-	
+
 	<!-- compile -->
 	<target name="compile" description="Compile TinyUpdater source">
 		<echo>Compiling</echo>
@@ -48,7 +48,7 @@
 			</manifest>
 		</jar>
 	</target>	
-	
+
   <target name="init">
     <!-- Create the time stamp -->
     <tstamp/>
