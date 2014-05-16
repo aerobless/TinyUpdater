@@ -80,4 +80,11 @@ public class TinyUpdater {
 		}
 		return dataXML.getPath();
 	}
+	
+	public static void log(String input){
+		log(input, null);
+	}
+	public static void log(String input, Exception e){
+		System.out.println(input);
+	}
 }
