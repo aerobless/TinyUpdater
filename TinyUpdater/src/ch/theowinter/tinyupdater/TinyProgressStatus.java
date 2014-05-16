@@ -1,6 +1,7 @@
 package ch.theowinter.tinyupdater;
 
 import java.util.Observable;
+import java.util.Observer;
 
 public class TinyProgressStatus extends Observable{
 	private String currentTask; //Length 300
@@ -47,5 +48,9 @@ public class TinyProgressStatus extends Observable{
 	public final void setOverallProgress(int processPercentage) {
 		overallProgress = processPercentage;
 		notifyObservers();
+	}
+	
+	public final void activateObserver(Observer o){
+		addObserver(o);
 	}
 }

@@ -29,6 +29,10 @@ public class TinyUpdater {
 		 * Specify 3 or more args and we assume you want to use the GUI version.
 		 * arg2 = application title
 		 */
+		
+		//TODO: TEST
+		args = new String[]{"10","http://jenkins.w1nter.net/job/ToxicTodo/lastSuccessfulBuild/artifact/ToxicTodo/dist/ToxicTodoClient.jar","Toxic Test"};
+		
 		if(args.length<2){
 			System.out.println("You didn't specify enough arguments to run TinyUpdater.");
 		} else if(args.length<3){
@@ -48,9 +52,12 @@ public class TinyUpdater {
 	private static void guiUpdater(){
 		int localProgress = 0;
 		TinyProgressStatus tinyProgress = new TinyProgressStatus("Initalizing updater..", 0);
-		Thread tinyUI = new Thread(new TinyUI(tinyProgress));
-		tinyUI.setDaemon(true);
-		tinyUI.start();
+		TinyUI tinyUI = new TinyUI(tinyProgress);
+		tinyProgress.activateObserver(tinyUI);
+		Thread tinyUIThread = new Thread(tinyUI);
+		tinyUIThread.setDaemon(true);
+		tinyUIThread.start();
+		tinyProgress.activateObserver(tinyUI);
 		String[] updateArray  = updateURL.split("/");
 		String downloadPath = getJarDirectory(updateArray[updateArray.length-1]);
 		localProgress+=10;
@@ -66,6 +73,7 @@ public class TinyUpdater {
 		tinyProgress.updateStatus("Downloading..", localProgress+=10);
 		downloadFile(updateURL, downloadPath);
 		tinyProgress.updateStatus("Download complete.", 100);
+		System.out.println("done test");
 	}
 
 	private static void cliUpdater(){

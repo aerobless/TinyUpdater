@@ -76,13 +76,13 @@ public class TinyUI implements Runnable, Observer {
 		centerMain.add(infoPanel);
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 		
-		lblStatus = new JLabel("Status: waiting for download..");
+		lblStatus = new JLabel(tinyProgress.getCurrentTask());
 		infoPanel.add(lblStatus);
 		
 		progressBar = new JProgressBar();
 		infoPanel.add(progressBar);
 		progressBar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		progressBar.setValue(45);
+		progressBar.setValue(tinyProgress.getOverallProgress());
 		progressBar.setStringPainted(true);
 	}
 
