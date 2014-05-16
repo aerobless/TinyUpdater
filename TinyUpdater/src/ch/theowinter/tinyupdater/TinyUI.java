@@ -15,11 +15,15 @@ import javax.swing.JProgressBar;
 public class TinyUI implements Runnable, Observer {
 
 	private JFrame frmTinyupdater;
+	private TinyProgressStatus tinyProgress;
+	private JLabel lblStatus;
+	private JProgressBar progressBar;
 
 	/**
 	 * Create the application.
 	 */
-	public TinyUI() {
+	public TinyUI(TinyProgressStatus tinyProgress) {
+		this.tinyProgress = tinyProgress;
 		initialize();
 	}
 
@@ -31,7 +35,7 @@ public class TinyUI implements Runnable, Observer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TinyUI window = new TinyUI();
+					TinyUI window = new TinyUI(tinyProgress);
 					window.frmTinyupdater.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -72,10 +76,10 @@ public class TinyUI implements Runnable, Observer {
 		centerMain.add(infoPanel);
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 		
-		JLabel lblNewLabel = new JLabel("Status: waiting for download..");
-		infoPanel.add(lblNewLabel);
+		lblStatus = new JLabel("Status: waiting for download..");
+		infoPanel.add(lblStatus);
 		
-		JProgressBar progressBar = new JProgressBar();
+		progressBar = new JProgressBar();
 		infoPanel.add(progressBar);
 		progressBar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		progressBar.setValue(45);
@@ -84,8 +88,10 @@ public class TinyUI implements Runnable, Observer {
 
 	@Override
 	public void update(Observable aO, Object aArg) {
-		// TODO Auto-generated method stub
 		System.out.println("UPDATING DUE TO OBSERVER");
+		lblStatus.setText(tinyProgress.getCurrentTask());
+		progressBar.setValue(tinyProgress.getOverallProgress());
+		
 	}
 
 }

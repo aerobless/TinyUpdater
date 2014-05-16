@@ -32,40 +32,64 @@ public class TinyUpdater {
 		if(args.length<2){
 			System.out.println("You didn't specify enough arguments to run TinyUpdater.");
 		} else if(args.length<3){
-			System.out.println("TinyUpdater:");
-			System.out.print("  Initalizing");
+			System.out.println("TinyUpdater CLI:");
 			updateURL = args[1];
-			System.out.print(".");
 			waitTime = Integer.parseInt(args[0]);
-			System.out.print(".");
-			String[] updateArray  = updateURL.split("/");
-			String downloadPath = getJarDirectory(updateArray[updateArray.length-1]);
-			System.out.println(".");
-			System.out.print("  Preparing for update");
-			for(int i = 0; i<waitTime; i++){
-				try {
-					Thread.sleep(i*100);
-					System.out.print(".");
-				} catch (InterruptedException e) {
-					System.out.println("Error - Can't sleep properly.");
-				}
-			}
-			System.out.println(".");
-			System.out.print("  Downloading update..");
-			downloadFile(updateURL, downloadPath);
-			System.out.println(".....");
-			System.out.println("  Update complete..");
+			waitTime = Integer.parseInt(args[0]);
+			cliUpdater();
 		} else {
 			log("Launching GUI version of TinyUpdater...");
 			updateURL = args[1];
 			waitTime = Integer.parseInt(args[0]);
-			Thread tinyUI = new Thread(new TinyUI());
-			tinyUI.setDaemon(true);
-			tinyUI.start();
-			
+			guiUpdater();
 		}
 	}
+	
+	private static void guiUpdater(){
+		int localProgress = 0;
+		TinyProgressStatus tinyProgress = new TinyProgressStatus("Initalizing updater..", 0);
+		Thread tinyUI = new Thread(new TinyUI(tinyProgress));
+		tinyUI.setDaemon(true);
+		tinyUI.start();
+		String[] updateArray  = updateURL.split("/");
+		String downloadPath = getJarDirectory(updateArray[updateArray.length-1]);
+		localProgress+=10;
+		tinyProgress.updateStatus("Preparing download..", localProgress);
+		for(int i = 0; i<waitTime; i++){
+			try {
+				Thread.sleep(i*100);
+				tinyProgress.setOverallProgress(localProgress+=i);
+			} catch (InterruptedException e) {
+				System.out.println("Error - Can't sleep properly.");
+			}
+		}
+		tinyProgress.updateStatus("Downloading..", localProgress+=10);
+		downloadFile(updateURL, downloadPath);
+		tinyProgress.updateStatus("Download complete.", 100);
+	}
 
+	private static void cliUpdater(){
+		System.out.print("  Initalizing");
+		System.out.print(".");
+		System.out.print(".");
+		String[] updateArray  = updateURL.split("/");
+		String downloadPath = getJarDirectory(updateArray[updateArray.length-1]);
+		System.out.println(".");
+		System.out.print("  Preparing for update");
+		for(int i = 0; i<waitTime; i++){
+			try {
+				Thread.sleep(i*100);
+				System.out.print(".");
+			} catch (InterruptedException e) {
+				System.out.println("Error - Can't sleep properly.");
+			}
+		}
+		System.out.println(".");
+		System.out.print("  Downloading update..");
+		downloadFile(updateURL, downloadPath);
+		System.out.println(".....");
+		System.out.println("  Update complete..");
+	}
 
 	public static void downloadFile(String downloadURL, String filenameAndPath) {
 		try {

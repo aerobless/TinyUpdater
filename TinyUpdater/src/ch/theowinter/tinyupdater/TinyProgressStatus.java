@@ -3,8 +3,8 @@ package ch.theowinter.tinyupdater;
 import java.util.Observable;
 
 public class TinyProgressStatus extends Observable{
-	String currentTask; //Length 300
-	int overallProgress; //0-100
+	private String currentTask; //Length 300
+	private int overallProgress; //0-100
 	
 	/**
 	 * Creates a new instance of this class.
@@ -12,7 +12,7 @@ public class TinyProgressStatus extends Observable{
 	 * @param aCurrentTask
 	 * @param aOverallProgress
 	 */
-	private TinyProgressStatus(String aCurrentTask, int aOverallProgress) {
+	TinyProgressStatus(String aCurrentTask, int aOverallProgress) {
 		super();
 		currentTask = aCurrentTask;
 		overallProgress = aOverallProgress;
@@ -28,8 +28,10 @@ public class TinyProgressStatus extends Observable{
 	/**
 	 * @param aCurrentTask the currentTask to set
 	 */
-	public final void setCurrentTask(String aCurrentTask) {
+	public final void updateStatus(String aCurrentTask, int processPercentage) {
 		currentTask = aCurrentTask;
+		overallProgress = processPercentage;
+		notifyObservers();
 	}
 
 	/**
@@ -42,10 +44,8 @@ public class TinyProgressStatus extends Observable{
 	/**
 	 * @param aOverallProgress the overallProgress to set
 	 */
-	public final void setOverallProgress(int aOverallProgress) {
-		overallProgress = aOverallProgress;
+	public final void setOverallProgress(int processPercentage) {
+		overallProgress = processPercentage;
+		notifyObservers();
 	}
-
-	
-	
 }
