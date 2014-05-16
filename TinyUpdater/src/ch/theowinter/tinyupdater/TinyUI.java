@@ -3,6 +3,8 @@ package ch.theowinter.tinyupdater;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -10,14 +12,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-public class TinyUI {
+public class TinyUI implements Runnable, Observer {
 
 	private JFrame frmTinyupdater;
 
 	/**
+	 * Create the application.
+	 */
+	public TinyUI() {
+		initialize();
+	}
+
+	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	@Override
+	public void run() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -29,14 +39,7 @@ public class TinyUI {
 			}
 		});
 	}
-
-	/**
-	 * Create the application.
-	 */
-	public TinyUI() {
-		initialize();
-	}
-
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -47,17 +50,19 @@ public class TinyUI {
 		frmTinyupdater.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTinyupdater.getContentPane().setLayout(new BorderLayout(0, 0));
 		
+		//We don't want the user to quit during an update.
+		frmTinyupdater.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
 		JPanel panel = new JPanel();
 		frmTinyupdater.getContentPane().add(panel, BorderLayout.WEST);
 		
-		JLabel label = new JLabel("    ");
-		panel.add(label);
+		JLabel sideSpacer = new JLabel("    ");
+		panel.add(sideSpacer);
 		
 		JPanel panel_1 = new JPanel();
 		frmTinyupdater.getContentPane().add(panel_1, BorderLayout.EAST);
 		
-		JLabel label_1 = new JLabel("    ");
-		panel_1.add(label_1);
+		panel_1.add(sideSpacer);
 		
 		JPanel centerMain = new JPanel();
 		frmTinyupdater.getContentPane().add(centerMain, BorderLayout.CENTER);
@@ -75,6 +80,12 @@ public class TinyUI {
 		progressBar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		progressBar.setValue(45);
 		progressBar.setStringPainted(true);
+	}
+
+	@Override
+	public void update(Observable aO, Object aArg) {
+		// TODO Auto-generated method stub
+		System.out.println("UPDATING DUE TO OBSERVER");
 	}
 
 }

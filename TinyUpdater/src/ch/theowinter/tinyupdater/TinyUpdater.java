@@ -20,12 +20,20 @@ public class TinyUpdater {
 	 * The original application needs to be shutdown at that point otherwise the update fails.
 	 */
 	public static void main(String[] args) {
-		System.out.println("TinyUpdater:");
-		System.out.print("  Initalizing");
-		if(args.length>2){
+		/*
+		 * --CLI version--
+		 * arg0 = time to wait before attempting to overwrite
+		 * arg1 = updateURL
+		 * 
+		 * --GUI version--
+		 * Specify 3 or more args and we assume you want to use the GUI version.
+		 * arg2 = application title
+		 */
+		if(args.length<2){
 			System.out.println("You didn't specify enough arguments to run TinyUpdater.");
-		}
-		else{
+		} else if(args.length<3){
+			System.out.println("TinyUpdater:");
+			System.out.print("  Initalizing");
 			updateURL = args[1];
 			System.out.print(".");
 			waitTime = Integer.parseInt(args[0]);
@@ -47,8 +55,17 @@ public class TinyUpdater {
 			downloadFile(updateURL, downloadPath);
 			System.out.println(".....");
 			System.out.println("  Update complete..");
+		} else {
+			log("Launching GUI version of TinyUpdater...");
+			updateURL = args[1];
+			waitTime = Integer.parseInt(args[0]);
+			Thread tinyUI = new Thread(new TinyUI());
+			tinyUI.setDaemon(true);
+			tinyUI.start();
+			
 		}
 	}
+
 
 	public static void downloadFile(String downloadURL, String filenameAndPath) {
 		try {
