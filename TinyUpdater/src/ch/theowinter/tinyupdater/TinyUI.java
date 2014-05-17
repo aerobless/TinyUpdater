@@ -55,7 +55,7 @@ public class TinyUI implements Observer {
 		frmTinyupdater.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		//We don't want the user to quit during an update.
-		frmTinyupdater.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		//frmTinyupdater.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		frmTinyupdater.getContentPane().add(panel, BorderLayout.WEST);
@@ -88,13 +88,7 @@ public class TinyUI implements Observer {
 
 	@Override
 	public void update(Observable aO, Object aArg) {
-		//main.frmTinyupdater.setVisible(false);
-		System.out.println("UPDATING DUE TO OBSERVER");
+		main.progressBar.setValue(tinyProgress.getOverallProgress());
 		main.lblStatus.setText(tinyProgress.getCurrentTask());
-		System.out.println(tinyProgress.getCurrentTask());
-		main.lblStatus.setVisible(false);
-
-		progressBar.setValue(tinyProgress.getOverallProgress());
-		System.out.println(tinyProgress.getOverallProgress());
 	}
 }
