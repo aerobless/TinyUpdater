@@ -95,7 +95,7 @@ public class TinyUpdater {
 		System.out.print(".");
 		String[] updateArray  = updateURL.split("/");
 		String downloadPath = getJarDirectory(updateArray[updateArray.length-1]);
-		System.out.println(".");
+		log(".");
 		System.out.print("  Preparing for update");
 		for(int i = 0; i<waitTime; i++){
 			try {
