@@ -50,24 +50,25 @@ public class TinyUpdater {
 	}
 	
 	private static void guiUpdater(String applicationTitel){
-		int localProgress = 0;
 		TinyProgressStatus tinyProgress = new TinyProgressStatus("Initalizing updater..", 0);
 		TinyUI tinyUI = new TinyUI(tinyProgress, applicationTitel);
 		tinyProgress.activateObserver(tinyUI);
 		
 		String[] updateArray  = updateURL.split("/");
 		String downloadPath = getJarDirectory(updateArray[updateArray.length-1]);
-		localProgress+=10;
-		tinyProgress.updateStatus("Preparing download..", localProgress);
+
+		tinyProgress.updateStatus("Preparing to download..", 0);
+		
+		waitTime *=10;
 		for(int i = 0; i<waitTime; i++){
 			try {
-				Thread.sleep(i*100);
-				tinyProgress.setOverallProgress(localProgress+=i);
+				Thread.sleep(50);
+				tinyProgress.setOverallProgress(i);
 			} catch (InterruptedException e) {
 				System.out.println("Error - Can't sleep properly.");
 			}
 		}
-		tinyProgress.updateStatus("Downloading..", localProgress+=10);
+		tinyProgress.updateStatus("Downloading..");
 		downloadFile(updateURL, downloadPath, tinyProgress);
 		tinyProgress.updateStatus("Download complete.", 100);
 		

@@ -43,13 +43,9 @@ public class TinyUI implements Observer {
 		JPanel leftPanel = new JPanel();
 		frmTinyupdater.getContentPane().add(leftPanel, BorderLayout.WEST);
 		
-		JLabel sideSpacer = new JLabel("    ");
-		leftPanel.add(sideSpacer);
-		
 		JPanel rightPanel = new JPanel();
 		frmTinyupdater.getContentPane().add(rightPanel, BorderLayout.EAST);
 		
-		rightPanel.add(sideSpacer);
 		
 		JPanel centerMain = new JPanel();
 		frmTinyupdater.getContentPane().add(centerMain, BorderLayout.CENTER);

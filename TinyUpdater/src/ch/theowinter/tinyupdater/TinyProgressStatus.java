@@ -35,6 +35,11 @@ public class TinyProgressStatus extends Observable{
 		notifyObservers();
 		setChanged();
 	}
+	public void updateStatus(String aCurrentTask) {
+		currentTask = aCurrentTask;
+		notifyObservers();
+		setChanged();
+	}
 
 	/**
 	 * @return the overallProgress
