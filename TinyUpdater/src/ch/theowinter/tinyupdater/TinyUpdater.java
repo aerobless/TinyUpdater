@@ -30,7 +30,7 @@ public class TinyUpdater {
 		 * arg2 = application title
 		 */
 		
-		//TODO: TEST
+		//TODO: TEST (will be removed for stable release)
 		args = new String[]{"10","http://jenkins.w1nter.net/job/ToxicTodo/lastSuccessfulBuild/artifact/ToxicTodo/dist/ToxicTodoClient.jar","Toxic Test"};
 		
 		if(args.length<2){
@@ -79,6 +79,15 @@ public class TinyUpdater {
 				System.out.println("Error - Can't sleep properly.");
 			}
 		}
+		
+		//Launch downloaded app:
+		System.out.println(updateArray[updateArray.length-1]);
+		try {
+			Runtime.getRuntime().exec(new String[]{"java","-jar",downloadPath});
+		} catch (IOException e) {
+			log("IOException while trying to launch the downloaded update..", e);
+		}
+		
 		System.exit(0);
 	}
 
@@ -142,6 +151,7 @@ public class TinyUpdater {
 	public static void log(String input){
 		log(input, null);
 	}
+	
 	public static void log(String input, Exception e){
 		System.out.println(input);
 	}
