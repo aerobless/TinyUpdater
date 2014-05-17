@@ -10,46 +10,43 @@ import java.net.URLConnection;
 
 public class TinyUpdater {
 	private static String updateURL;
-	private static int waitTime;
 
-	/*
+	/**
 	 * We expect args in the form of a waitTime-Count (seconds) and one http download-URL 
 	 * that ends with a ".jar" file. This jar file has the same name as the file
 	 * we're supposed to be updating.
-	 * TinyUpdater waits until his waitTime is over and then tries to download and write the file.
-	 * The original application needs to be shutdown at that point otherwise the update fails.
+	 * 
+	 * TinyUpdater waits until its waitTime is over and then tries to download and overwrite the old file
+	 * with the new one. Trying to overwrite the .jar of a program that's still open may result in
+	 * strange behavior depending on your operating system, so be sure to close your old application asap.
+	 * 
+	 *  + arg0 = time to wait before attempting to download & overwrite
+	 *  + arg1 = the URL to your updated .jar file
+	 *  + arg2 = the application title (if you specify 3 args we assume you want to use the GUI version)
+	 * 
 	 */
 	public static void main(String[] args) {
-		/*
-		 * --CLI version--
-		 * arg0 = time to wait before attempting to overwrite
-		 * arg1 = updateURL
-		 * 
-		 * --GUI version--
-		 * Specify 3 or more args and we assume you want to use the GUI version.
-		 * arg2 = application title
-		 */
 		
-		//TODO: TEST (will be removed for stable release)
-		args = new String[]{"10","http://jenkins.w1nter.net/job/ToxicTodo/lastSuccessfulBuild/artifact/ToxicTodo/dist/ToxicTodoClient.jar","Toxic Test"};
+		//Test String: Uncomment to test TinyUpdater
+		//args = new String[]{"10","http://jenkins.w1nter.net/job/ToxicTodo/lastSuccessfulBuild/artifact/ToxicTodo/dist/ToxicTodoClient.jar","Toxic Test"};
 		
 		if(args.length<2){
 			System.out.println("You didn't specify enough arguments to run TinyUpdater.");
-		} else if(args.length<3){
+		} else if (args.length == 2){
 			System.out.println("TinyUpdater CLI:");
 			updateURL = args[1];
-			waitTime = Integer.parseInt(args[0]);
-			waitTime = Integer.parseInt(args[0]);
-			cliUpdater();
-		} else {
+			cliUpdater(Integer.parseInt(args[0]));
+		} else if (args.length == 3){
 			log("Launching GUI version of TinyUpdater...");
 			updateURL = args[1];
-			waitTime = Integer.parseInt(args[0]);
-			guiUpdater(args[2]);
+			guiUpdater(args[2], Integer.parseInt(args[0]));
+		} else{
+			log("TinyUpdater only supports up to 3arguments.");
+			log("Checkout the documentation on: https://github.com/aerobless/TinyUpdater");
 		}
 	}
 	
-	private static void guiUpdater(String applicationTitel){
+	private static void guiUpdater(String applicationTitel, int waitTime){
 		TinyProgressStatus tinyProgress = new TinyProgressStatus("Initalizing updater..", 0);
 		TinyUI tinyUI = new TinyUI(tinyProgress, applicationTitel);
 		tinyProgress.activateObserver(tinyUI);
@@ -65,7 +62,7 @@ public class TinyUpdater {
 				Thread.sleep(50);
 				tinyProgress.setOverallProgress(i);
 			} catch (InterruptedException e) {
-				System.out.println("Error - Can't sleep properly.");
+				log("Error - Can't sleep properly.", e);
 			}
 		}
 		tinyProgress.updateStatus("Downloading..");
@@ -88,11 +85,10 @@ public class TinyUpdater {
 		} catch (IOException e) {
 			log("IOException while trying to launch the downloaded update..", e);
 		}
-		
 		System.exit(0);
 	}
 
-	private static void cliUpdater(){
+	private static void cliUpdater(int waitTime){
 		System.out.print("  Initalizing");
 		System.out.print(".");
 		System.out.print(".");
@@ -132,9 +128,9 @@ public class TinyUpdater {
 			fos.write(fileData); 
 			fos.close();
 		} catch (MalformedURLException m) {
-			System.out.println(m);
+			log("MalformedURLException while trying to download a file.", m);
 		} catch (IOException io) {
-			System.out.println(io);
+			log("IOException while trying to download a file.", io);
 		}
 	}
 
@@ -144,7 +140,7 @@ public class TinyUpdater {
 		try {
 			dataXML = new URL(jarLocation, filename);
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			log("MalformedURLException while trying to get the jar's directory.", e);
 		}
 		return dataXML.getPath();
 	}

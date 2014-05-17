@@ -4,8 +4,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class TinyProgressStatus extends Observable{
-	private String currentTask; //Length 300
-	private int overallProgress; //0-100
+	private String currentTask;
+	private int overallProgress;
 	
 	/**
 	 * Creates a new instance of this class.
