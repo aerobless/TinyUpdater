@@ -105,7 +105,7 @@ public class TinyUpdater {
 				System.out.println("Error - Can't sleep properly.");
 			}
 		}
-		System.out.println(".");
+		log(".");
 		System.out.print("  Downloading update..");
 		downloadFile(updateURL, downloadPath, null);
 		System.out.println(".....");
