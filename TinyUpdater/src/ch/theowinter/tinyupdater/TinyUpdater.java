@@ -31,9 +31,10 @@ public class TinyUpdater {
 		//args = new String[]{"10","http://jenkins.w1nter.net/job/ToxicTodo/lastSuccessfulBuild/artifact/ToxicTodo/dist/ToxicTodoClient.jar","Toxic Test"};
 		
 		if(args.length<2){
-			System.out.println("You didn't specify enough arguments to run TinyUpdater.");
+			log("You didn't specify enough arguments to run TinyUpdater.");
+			log("Checkout the documentation on: https://github.com/aerobless/TinyUpdater");
 		} else if (args.length == 2){
-			System.out.println("TinyUpdater CLI:");
+			log("TinyUpdater CLI:");
 			updateURL = args[1];
 			cliUpdater(Integer.parseInt(args[0]));
 		} else if (args.length == 3){
