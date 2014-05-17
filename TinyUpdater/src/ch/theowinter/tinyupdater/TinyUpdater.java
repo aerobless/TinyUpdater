@@ -68,9 +68,18 @@ public class TinyUpdater {
 			}
 		}
 		tinyProgress.updateStatus("Downloading..", localProgress+=10);
-		downloadFile(updateURL, downloadPath);
+		downloadFile(updateURL, downloadPath, tinyProgress);
 		tinyProgress.updateStatus("Download complete.", 100);
-		System.out.println("done test");
+		
+		//Show success:
+		for(int i = 0; i<5; i++){
+			try {
+				Thread.sleep(i*100);
+			} catch (InterruptedException e) {
+				System.out.println("Error - Can't sleep properly.");
+			}
+		}
+		System.exit(0);
 	}
 
 	private static void cliUpdater(){
@@ -91,12 +100,12 @@ public class TinyUpdater {
 		}
 		System.out.println(".");
 		System.out.print("  Downloading update..");
-		downloadFile(updateURL, downloadPath);
+		downloadFile(updateURL, downloadPath, null);
 		System.out.println(".....");
 		System.out.println("  Update complete..");
 	}
 
-	public static void downloadFile(String downloadURL, String filenameAndPath) {
+	public static void downloadFile(String downloadURL, String filenameAndPath, TinyProgressStatus tinyProgress) {
 		try {
 			URL url = new URL(downloadURL);
 			URLConnection con = url.openConnection(); 
@@ -104,6 +113,9 @@ public class TinyUpdater {
 			byte[] fileData = new byte[con.getContentLength()];
 			for (int x = 0; x < fileData.length; x++) {
 				fileData[x] = dis.readByte();
+				if(tinyProgress != null){
+					tinyProgress.setOverallProgress(x/(fileData.length/100));
+				}
 			}
 			dis.close(); 
 			FileOutputStream fos = new FileOutputStream(new File(filenameAndPath));
