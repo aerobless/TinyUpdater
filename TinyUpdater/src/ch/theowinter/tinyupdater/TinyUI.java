@@ -1,7 +1,6 @@
 package ch.theowinter.tinyupdater;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.Observable;
 import java.util.Observer;
@@ -23,50 +22,34 @@ public class TinyUI implements Observer {
 	/**
 	 * Create the application.
 	 */
-	public TinyUI(TinyProgressStatus tinyProgress) {
+	public TinyUI(TinyProgressStatus tinyProgress, String titleOfUpdatedApplication) {
 		this.tinyProgress = tinyProgress;
-		initialize();
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public void run() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					main = new TinyUI(tinyProgress);
-					main.frmTinyupdater.setVisible(true);
-				} catch (Exception e) {
-				//TODO:
-					System.out.println("error here");
-				}
-			}
-		});
+		initialize(titleOfUpdatedApplication);
+		main.frmTinyupdater.setVisible(true);
 	}
 	
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String titleOfUpdatedApplication) {
 		frmTinyupdater = new JFrame();
-		frmTinyupdater.setTitle("TinyUpdater");
+		frmTinyupdater.setTitle("TinyUpdater: "+titleOfUpdatedApplication);
 		frmTinyupdater.setBounds(100, 100, 445, 103);
 		frmTinyupdater.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		//We don't want the user to quit during an update.
-		//frmTinyupdater.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frmTinyupdater.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
-		frmTinyupdater.getContentPane().add(panel, BorderLayout.WEST);
+		JPanel leftPanel = new JPanel();
+		frmTinyupdater.getContentPane().add(leftPanel, BorderLayout.WEST);
 		
 		JLabel sideSpacer = new JLabel("    ");
-		panel.add(sideSpacer);
+		leftPanel.add(sideSpacer);
 		
-		JPanel panel_1 = new JPanel();
-		frmTinyupdater.getContentPane().add(panel_1, BorderLayout.EAST);
+		JPanel rightPanel = new JPanel();
+		frmTinyupdater.getContentPane().add(rightPanel, BorderLayout.EAST);
 		
-		panel_1.add(sideSpacer);
+		rightPanel.add(sideSpacer);
 		
 		JPanel centerMain = new JPanel();
 		frmTinyupdater.getContentPane().add(centerMain, BorderLayout.CENTER);
@@ -88,7 +71,7 @@ public class TinyUI implements Observer {
 
 	@Override
 	public void update(Observable aO, Object aArg) {
-		main.progressBar.setValue(tinyProgress.getOverallProgress());
-		main.lblStatus.setText(tinyProgress.getCurrentTask());
+		progressBar.setValue(tinyProgress.getOverallProgress());
+		lblStatus.setText(tinyProgress.getCurrentTask());
 	}
 }

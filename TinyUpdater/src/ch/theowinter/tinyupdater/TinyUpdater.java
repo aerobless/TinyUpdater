@@ -45,16 +45,15 @@ public class TinyUpdater {
 			log("Launching GUI version of TinyUpdater...");
 			updateURL = args[1];
 			waitTime = Integer.parseInt(args[0]);
-			guiUpdater();
+			guiUpdater(args[2]);
 		}
 	}
 	
-	private static void guiUpdater(){
+	private static void guiUpdater(String applicationTitel){
 		int localProgress = 0;
 		TinyProgressStatus tinyProgress = new TinyProgressStatus("Initalizing updater..", 0);
-		TinyUI tinyUI = new TinyUI(tinyProgress);
+		TinyUI tinyUI = new TinyUI(tinyProgress, applicationTitel);
 		tinyProgress.activateObserver(tinyUI);
-		tinyUI.run();
 		
 		String[] updateArray  = updateURL.split("/");
 		String downloadPath = getJarDirectory(updateArray[updateArray.length-1]);
