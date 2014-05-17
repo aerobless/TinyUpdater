@@ -1,6 +1,7 @@
 package ch.theowinter.tinyupdater;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Observable;
 import java.util.Observer;
@@ -35,6 +36,8 @@ public class TinyUI implements Observer {
 		frmTinyupdater = new JFrame();
 		frmTinyupdater.setTitle("TinyUpdater: "+titleOfUpdatedApplication);
 		frmTinyupdater.setBounds(100, 100, 445, 103);
+		frmTinyupdater.setMaximumSize(new Dimension(445, 103));
+		frmTinyupdater.setMinimumSize(new Dimension(445, 103));
 		frmTinyupdater.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		//We don't want the user to quit during an update.
