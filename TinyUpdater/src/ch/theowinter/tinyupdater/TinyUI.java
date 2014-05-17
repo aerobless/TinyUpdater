@@ -35,9 +35,9 @@ public class TinyUI implements Observer {
 	private void initialize(String titleOfUpdatedApplication) {
 		frmTinyupdater = new JFrame();
 		frmTinyupdater.setTitle("TinyUpdater: "+titleOfUpdatedApplication);
-		frmTinyupdater.setBounds(100, 100, 445, 103);
 		frmTinyupdater.setMaximumSize(new Dimension(445, 103));
 		frmTinyupdater.setMinimumSize(new Dimension(445, 103));
+		frmTinyupdater.setLocationRelativeTo(null);
 		frmTinyupdater.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		//We don't want the user to quit during an update.

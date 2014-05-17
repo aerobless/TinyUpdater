@@ -28,7 +28,7 @@ public class TinyUpdater {
 	public static void main(String[] args) {
 		
 		//Test String: Uncomment to test TinyUpdater
-		//args = new String[]{"10","http://jenkins.w1nter.net/job/ToxicTodo/lastSuccessfulBuild/artifact/ToxicTodo/dist/ToxicTodoClient.jar","Toxic Test"};
+		args = new String[]{"10","http://jenkins.w1nter.net/job/ToxicTodo/lastSuccessfulBuild/artifact/ToxicTodo/dist/ToxicTodoClient.jar","Toxic Test"};
 		
 		if(args.length<2){
 			log("You didn't specify enough arguments to run TinyUpdater.");
