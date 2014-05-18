@@ -6,7 +6,7 @@ TinyUpdater is a lightweight, standalone java application intended for updating 
 Integrating TinyUpdater into your application is easy. Download TinyUpdater on your endusers computer or ship it with your application. To run an update all you do is create a new executor and specify the correct parameters.
 
   	try {
-		Runtime.getRuntime().exec("java -jar "+downloadPath+" 10 "+updateURL+"My application");
+		Runtime.getRuntime().exec("java -jar "+downloadPath+" 10 "+updateURL+" My application");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
