@@ -1,7 +1,7 @@
 TinyUpdater
 ===========
 
-TinyUpdater is a lightweight, standalone java application intended for updating other java applications. It has both a command-line and GUI mode. The way it works is that you call TinyUpdater with the URL to the updated jar (for example on a Jenkins server). TinyUpdater will download that jar while displaying a progress indication for the enduser. Once the file has been successfully downloaded, TinyUpdater will overwrite the old .jar with the new one.
+TinyUpdater is a lightweight, standalone java application intended for updating other java applications. It has both a command-line mode and a GUI mode. The way it works is that you call TinyUpdater with the URL to the updated jar (for example on a Jenkins server). TinyUpdater will download that jar while displaying a progress indication for the enduser. Once the file has been successfully downloaded, TinyUpdater will overwrite the old .jar with the new one.
 
 Integrating TinyUpdater into your application is easy. Download TinyUpdater on your endusers computer or ship it with your application. To run an update all you do is create a new executor and specify the correct parameters.
 
