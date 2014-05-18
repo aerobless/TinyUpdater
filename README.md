@@ -29,7 +29,7 @@ If you specify a application title as arg2 we'll launch the GUI mode. The GUI ve
 **TinyUpdater Sonar-Server:** [http://sonar.w1nter.net/dashboard/index/103](http://sonar.w1nter.net/dashboard/index/103)
 
 
-##Licence
+##License
 
 > Copyright (c) 2014 Theo Winter
 
