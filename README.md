@@ -13,6 +13,7 @@ Integrating TinyUpdater into your application is easy. Download TinyUpdater on y
 		}
 		
 **Parameters**
+
 | Parameter | Description | Example |
 | --------- | ----------- | ------- |
 | arg0      | The time TinyUpdater should wait before attempting to overwrite your original .jar in seconds. | 10
