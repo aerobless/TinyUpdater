@@ -18,7 +18,7 @@ Integrating TinyUpdater into your application is easy. Download TinyUpdater on y
 | --------- | ----------- | ------- |
 | arg0      | The time TinyUpdater should wait before attempting to overwrite your original .jar in seconds. | 10
 | arg1    | The URL to your updated .jar file. | http:// yourServer.com/yourApp.jar
-| arg2 (optional) | The title of your application. (If you specify arg2 we assume that you want to run the GUI version. If you don't specify arg2 we'll run the CLi version instead. |  Your Application Name
+| arg2 (optional) | The title of your application. (If you specify arg2 we assume that you want to run the GUI version. If you don't specify arg2 we'll run the CLi version instead. |  YourApplicationName
 
 **Difference between GUI-Mode and CLI-Mode:**  
 If you specify a application title as arg2 we'll launch the GUI mode. The GUI version will display a nice progressbar while downloading the new .jar. It will also lauch the new .jar once it is finished downloading it. (The CLI-version will not launch the downloaded .jar because often you'd want to launch CLI apps with special args or from a .sh or .bat launcher.)
