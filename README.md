@@ -23,7 +23,7 @@ Integrating TinyUpdater into your application is easy. Download TinyUpdater on y
 **Difference between GUI-Mode and CLI-Mode:**  
 If you specify a application title as arg2 we'll launch the GUI mode. The GUI version will display a nice progressbar while downloading the new .jar. It will also lauch the new .jar once it is finished downloading it. (The CLI-version will not launch the downloaded .jar because often you'd want to launch CLI apps with special args or from a .sh or .bat launcher.)
 
-https://raw.githubusercontent.com/aerobless/TinyUpdater/master/screenshot_gui.png
+![GUI Screenshot](https://raw.githubusercontent.com/aerobless/TinyUpdater/master/screenshot_gui.png)
 
 **TinyUpdater CI-Server:** [http://w1nter.net:8080/job/TinyUpdater/](http://w1nter.net:8080/job/TinyUpdater/)  
 **TinyUpdater Sonar-Server:** [http://sonar.w1nter.net/dashboard/index/103](http://sonar.w1nter.net/dashboard/index/103)
