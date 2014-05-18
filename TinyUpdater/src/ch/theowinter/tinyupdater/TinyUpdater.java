@@ -79,14 +79,16 @@ public class TinyUpdater {
 			}
 		}
 		
-		//Launch downloaded app:
+		//Launch new jar:
 		System.out.println(updateArray[updateArray.length-1]);
 		try {
 			Runtime.getRuntime().exec(new String[]{"java","-jar",downloadPath});
 		} catch (IOException e) {
 			log("IOException while trying to launch the downloaded update..", e);
 		}
-		System.exit(0);
+		
+		//Disposing of GUI and graceful exit:
+		tinyUI.shutdownGUI();
 	}
 
 	private static void cliUpdater(int waitTime){

@@ -72,4 +72,11 @@ public class TinyUI implements Observer {
 		progressBar.setValue(tinyProgress.getOverallProgress());
 		lblStatus.setText(tinyProgress.getCurrentTask());
 	}
+	
+	/**
+	 * Shutdown the GUI so the application can exit gracefully.
+	 */
+	public void shutdownGUI(){
+		this.frmTinyupdater.dispose();
+	}
 }
