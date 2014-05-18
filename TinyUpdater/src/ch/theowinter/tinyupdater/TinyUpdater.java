@@ -11,6 +11,10 @@ import java.net.URLConnection;
 public class TinyUpdater {
 	private static String updateURL;
 
+	private TinyUpdater() {
+		super();
+	}
+
 	/**
 	 * We expect args in the form of a waitTime-Count (seconds) and one http download-URL 
 	 * that ends with a ".jar" file. This jar file has the same name as the file
@@ -47,6 +51,40 @@ public class TinyUpdater {
 		}
 	}
 	
+	/**
+	 * The CLI-based Updater
+	 * 
+	 * @param waitTime
+	 */
+	private static void cliUpdater(int waitTime){
+		logN("  Initalizing");
+		logN(".");
+		logN(".");
+		String[] updateArray  = updateURL.split("/");
+		String downloadPath = getJarDirectory(updateArray[updateArray.length-1]);
+		log(".");
+		logN("  Preparing for update");
+		for(int i = 0; i<waitTime; i++){
+			try {
+				Thread.sleep(i*100);
+				logN(".");
+			} catch (InterruptedException e) {
+				log("Error - Can't sleep properly.", e);
+			}
+		}
+		log(".");
+		logN("  Downloading update..");
+		downloadFile(updateURL, downloadPath, null);
+		log(".....");
+		log("  Update complete..");
+	}
+	
+	/**
+	 * The GUI-based Updater
+	 * 
+	 * @param applicationTitel
+	 * @param waitTime
+	 */
 	private static void guiUpdater(String applicationTitel, int waitTime){
 		TinyProgressStatus tinyProgress = new TinyProgressStatus("Initalizing updater..", 0);
 		TinyUI tinyUI = new TinyUI(tinyProgress, applicationTitel);
@@ -75,12 +113,11 @@ public class TinyUpdater {
 			try {
 				Thread.sleep(i*100);
 			} catch (InterruptedException e) {
-				System.out.println("Error - Can't sleep properly.");
+				log("InterruptedException while trying to sleep.", e);
 			}
 		}
 		
 		//Launch new jar:
-		System.out.println(updateArray[updateArray.length-1]);
 		try {
 			Runtime.getRuntime().exec(new String[]{"java","-jar",downloadPath});
 		} catch (IOException e) {
@@ -89,29 +126,6 @@ public class TinyUpdater {
 		
 		//Disposing of GUI and graceful exit:
 		tinyUI.shutdownGUI();
-	}
-
-	private static void cliUpdater(int waitTime){
-		System.out.print("  Initalizing");
-		System.out.print(".");
-		System.out.print(".");
-		String[] updateArray  = updateURL.split("/");
-		String downloadPath = getJarDirectory(updateArray[updateArray.length-1]);
-		log(".");
-		System.out.print("  Preparing for update");
-		for(int i = 0; i<waitTime; i++){
-			try {
-				Thread.sleep(i*100);
-				System.out.print(".");
-			} catch (InterruptedException e) {
-				System.out.println("Error - Can't sleep properly.");
-			}
-		}
-		log(".");
-		System.out.print("  Downloading update..");
-		downloadFile(updateURL, downloadPath, null);
-		System.out.println(".....");
-		System.out.println("  Update complete..");
 	}
 
 	public static void downloadFile(String downloadURL, String filenameAndPath, TinyProgressStatus tinyProgress) {
@@ -148,6 +162,18 @@ public class TinyUpdater {
 		return dataXML.getPath();
 	}
 	
+	/**
+	 * Print without newline
+	 * @param input
+	 */
+	public static void logN(String input){
+		System.out.print(input);
+	}
+	
+	/**
+	 * Print with newline
+	 * @param input
+	 */
 	public static void log(String input){
 		log(input, null);
 	}
