@@ -1,9 +1,9 @@
 TinyUpdater
 ===========
 
-In some operating systems, for example Windows, you can't overwrite .jar files while they're being executed. Therefor you need a middle-man that handles downloading & overwriting the original .jar with a updated version. You could use batch & shell scripts for this task, but then you have to worry about operating system again.
+TinyUpdater is a lightweight, standalone java application intended for updating other java applications. It has both a command-line and GUI mode. The way it works is that you call TinyUpdater with the URL to the updated jar (for example on a Jenkins server). TinyUpdater will download that jar while displaying a progress indication for the enduser. Once the file has been successfully downloaded, TinyUpdater will overwrite the old .jar with the new one.
 
-With TinyUpdater you can work around this issue. Just have your application download "TinyUpdater" and run it through an executor before closing your main application.
+Integrating TinyUpdater into your application is easy. Download TinyUpdater on your endusers computer or ship it with your application. To run an update all you do is create a new executor and specify the correct parameters.
 
   	try {
 		Runtime.getRuntime().exec("java -jar "+downloadPath+" 10 "+updateURL);
@@ -12,9 +12,15 @@ With TinyUpdater you can work around this issue. Just have your application down
 			e.printStackTrace();
 		}
 		
-you can specify a **waitTime** in seconds and a **updateURL** where the updated .jar of your application can be found.
+**Parameters**
+| Parameter | Description | Example |
+| --------- | ----------- | ------- |
+| arg0      | The time TinyUpdater should wait before attempting to overwrite your original .jar in seconds. | 10
+| arg1    | The URL to your updated .jar file. | http:// yourServer.com/yourApp.jar
+| arg2 (optional) | The title of your application. (If you specify arg2 we assume that you want to run the GUI version. If you don't specify arg2 we'll run the CLi version instead. |  Your Application Name
 
 **TinyUpdater CI-Server:** [http://w1nter.net:8080/job/TinyUpdater/](http://w1nter.net:8080/job/TinyUpdater/)
+**TinyUpdater Sonar-Server:** [http://sonar.w1nter.net/dashboard/index/103](http://sonar.w1nter.net/dashboard/index/103)
 
 > Copyright (c) 2014 Theo Winter
 
