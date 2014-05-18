@@ -12,7 +12,7 @@ Integrating TinyUpdater into your application is easy. Download TinyUpdater on y
 			e.printStackTrace();
 		}
 		
-**Parameters**
+##Parameters
 
 | Parameter | Description | Example |
 | --------- | ----------- | ------- |
@@ -20,7 +20,7 @@ Integrating TinyUpdater into your application is easy. Download TinyUpdater on y
 | arg1    | The URL to your updated .jar file. | http:// yourServer.com/yourApp.jar
 | arg2 (optional) | The title of your application. (If you specify arg2 we assume that you want to run the GUI version. If you don't specify arg2 we'll run the CLi version instead. |  Your Application Name
 
-**TinyUpdater CI-Server:** [http://w1nter.net:8080/job/TinyUpdater/](http://w1nter.net:8080/job/TinyUpdater/)
+**TinyUpdater CI-Server:** [http://w1nter.net:8080/job/TinyUpdater/](http://w1nter.net:8080/job/TinyUpdater/)  
 **TinyUpdater Sonar-Server:** [http://sonar.w1nter.net/dashboard/index/103](http://sonar.w1nter.net/dashboard/index/103)
 
 > Copyright (c) 2014 Theo Winter
