@@ -20,8 +20,16 @@ Integrating TinyUpdater into your application is easy. Download TinyUpdater on y
 | arg1    | The URL to your updated .jar file. | http:// yourServer.com/yourApp.jar
 | arg2 (optional) | The title of your application. (If you specify arg2 we assume that you want to run the GUI version. If you don't specify arg2 we'll run the CLi version instead. |  Your Application Name
 
+**Difference between GUI-Mode and CLI-Mode:**  
+If you specify a application title as arg2 we'll launch the GUI mode. The GUI version will display a nice progressbar while downloading the new .jar. It will also lauch the new .jar once it is finished downloading it. (The CLI-version will not launch the downloaded .jar because often you'd want to launch CLI apps with special args or from a .sh or .bat launcher.)
+
+
+
 **TinyUpdater CI-Server:** [http://w1nter.net:8080/job/TinyUpdater/](http://w1nter.net:8080/job/TinyUpdater/)  
 **TinyUpdater Sonar-Server:** [http://sonar.w1nter.net/dashboard/index/103](http://sonar.w1nter.net/dashboard/index/103)
+
+
+##Licence
 
 > Copyright (c) 2014 Theo Winter
 
