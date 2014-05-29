@@ -117,8 +117,13 @@ public class TinyUpdater {
 
 		// Launch new jar:
 		try {
-			Runtime.getRuntime().exec(
-					new String[] { "java", "-jar", downloadPath });
+			if("windows".equals(getOS())){
+				Runtime.getRuntime().exec(
+						new String[] { "java", "-jar", downloadPath.substring(1) });
+			}else{
+				Runtime.getRuntime().exec(
+						new String[] { "java", "-jar", downloadPath });
+			}
 		} catch (IOException e) {
 			log("IOException while trying to launch the downloaded update..", e);
 		}
@@ -186,5 +191,22 @@ public class TinyUpdater {
 
 	public static void log(String input, Exception e) {
 		System.out.println(input); //NOSONAR
+	}
+	
+	private static String getOS(){
+		String operatingSystemRaw = System.getProperty("os.name");
+		String output;
+		if(operatingSystemRaw.contains("Windows")){
+			output = "windows";
+		} else if(operatingSystemRaw.contains("Mac")){
+			output = "osx";
+		} else if("Linux".equals(operatingSystemRaw)){
+			output = "linux";
+		} else {
+			output = "unkown";
+			log("Operating System not recognized...");
+			log("Raw Data: "+operatingSystemRaw);
+		}
+		return output;
 	}
 }
