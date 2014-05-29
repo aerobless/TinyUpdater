@@ -27,6 +27,7 @@ public class TinyUI implements Observer {
 		this.tinyProgress = tinyProgress;
 		initialize(titleOfUpdatedApplication);
 		main.frmTinyupdater.setVisible(true);
+		main.frmTinyupdater.setResizable(false);
 	}
 	
 	/**
