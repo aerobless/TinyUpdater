@@ -4,9 +4,11 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLDecoder;
 
 public class TinyUpdater {
 	private static String updateURL;
@@ -158,17 +160,21 @@ public class TinyUpdater {
 		}
 	}
 
-	public static String getJarDirectory(String filename) {
-		URL jarLocation = TinyUpdater.class.getProtectionDomain()
-				.getCodeSource().getLocation();
+	public static String getJarDirectory(String filename){
+		URL jarLocation = TinyUpdater.class.getProtectionDomain().getCodeSource().getLocation();
 		URL dataXML = null;
 		try {
 			dataXML = new URL(jarLocation, filename);
 		} catch (MalformedURLException e) {
-			log("MalformedURLException while trying to get the jar's directory.",
-					e);
+			log("Malformed URL in LogicEngine. JarLoc: "+jarLocation+" Filename: "+filename, e);
 		}
-		return dataXML.getPath();
+		String decodedPath = null;
+		try {
+			decodedPath = URLDecoder.decode(dataXML.getPath(), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			log("UnsipportedEncodingException in LogicEngine. (UTF-8)", e);
+		}
+		return decodedPath;
 	}
 
 	/**
