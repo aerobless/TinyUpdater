@@ -25,7 +25,7 @@ If you specify a application title as arg2 we'll launch the GUI mode. The GUI ve
 
 ![GUI Screenshot](https://raw.githubusercontent.com/aerobless/TinyUpdater/master/screenshot_gui.png)
 
-**TinyUpdater CI-Server:** [http://w1nter.net:8080/job/TinyUpdater/](http://w1nter.net:8080/job/TinyUpdater/)  
+**TinyUpdater .JAR download:** [http://w1nter.net:8080/job/TinyUpdater/](download.theowinter.ch/TinyUpdater.jar)  
 
 
 ##License
